@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict
+from typing import Optional
 
 class UserIn(BaseModel):
     name: str
@@ -12,3 +13,8 @@ class UserOut(BaseModel):
     name: str
     email: str
     role_id: int
+
+class UserUpdate(BaseModel):
+    name: Optional[str] = None
+    email: Optional[str] = None
+    role_id: Optional[int] = None

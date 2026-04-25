@@ -1,1 +1,1 @@
-from schemas.user import UserIn
+from schemas.user import UserIn, UserOut, UserUpdate
