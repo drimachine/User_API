@@ -1,15 +1,22 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Header
 from sqlalchemy.orm import Session
 from database import get_db
 from models import User, Role
 from schemas import UserIn, UserUpdate
+from typing import Annotated
 
 router = APIRouter()
 
 @router.get("/users")
-async def list_user(db: Session = Depends(get_db)):
-    users = db.query(User).all()
-    return users
+async def list_user(x_user_id: Annotated[int | None, Header()], db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == x_user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="Ususario não encontrado")
+    if user.role_id == 1:
+        users = db.query(User).all()
+        return users
+    else:
+        return user
 
 @router.post("/users")
 async def create_user(user_data: UserIn, db: Session = Depends(get_db)):
