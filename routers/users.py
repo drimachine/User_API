@@ -16,7 +16,7 @@ async def list_user(x_user_id: Annotated[int, Header()], db: Session = Depends(g
         users = db.query(User).all()
         return users
     else:
-        return user
+        return user_auth
 
 @router.post("/users")
 async def create_user(x_user_id: Annotated[int, Header()], user_data: UserIn, db: Session = Depends(get_db)):
