@@ -80,7 +80,7 @@ A relação entre usuário e papel é de muitos-para-um: um usuário possui exat
 
 ### Autenticação simplificada
 
-A identificação do usuário é feita via header `X-User-Id`. Essa abordagem foi escolhida para manter o foco do desafio nas regras de acesso e na modelagem, evitando a complexidade de JWT, hash de senha e fluxo de login.
+A identificação do usuário é feita via header `X-User-Id`. Essa abordagem foi escolhida por ser uma forma mais simples de simular autenticação
 
 ### Stack
 
