@@ -34,7 +34,7 @@ DATABASE_URL=postgresql://postgres:suasenha@localhost:5432/user_roles
 ### Rodando
 
 ```bash
-# Popula o banco com os papéis iniciais
+# Popula o banco com roles e usuários iniciais
 python seed.py
 
 # Sobe o servidor
@@ -43,6 +43,27 @@ uvicorn main:app --reload
 
 A API estará disponível em `http://localhost:8000`.
 Documentação interativa em `http://localhost:8000/docs`.
+
+### Dados iniciais (seed)
+
+O `seed.py` popula o banco com os seguintes registros:
+
+**Roles**
+
+| id | name |
+|----|------|
+| 1 | admin |
+| 2 | user |
+
+**Usuários**
+
+| id | name | email | role |
+|----|------|-------|------|
+| 1 | Pedro | pedro@email.com | admin |
+| 2 | Matheus | matheus@email.com | user |
+
+Para testar as rotas como admin, use `X-User-Id: 1`.
+Para testar como user comum, use `X-User-Id: 2`.
 
 ---
 
@@ -80,7 +101,7 @@ A relação entre usuário e papel é de muitos-para-um: um usuário possui exat
 
 ### Autenticação simplificada
 
-A identificação do usuário é feita via header `X-User-Id`. Essa abordagem foi escolhida por ser uma forma mais simples de simular autenticação
+A identificação do usuário é feita via header `X-User-Id`. Essa abordagem foi escolhida para manter o foco do desafio nas regras de acesso e na modelagem, evitando a complexidade de JWT, hash de senha e fluxo de login.
 
 ### Stack
 
