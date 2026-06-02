@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: "Pedro" 
+      POSTGRES_PASSWORD: "*Pedrinhodovrau10"
+      POSTGRES_DB: "User_Api"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U Pedro -d User_Api"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql://Pedro:*Pedrinhodovrau10@db:5432/User_Api"

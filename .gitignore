@@ -1,2 +1,4 @@
 .env
 logs/user_api.log
+.Dockerfile
+.docker-compose.yml 
